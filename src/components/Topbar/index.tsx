@@ -11,14 +11,14 @@ export default function TopBar() {
     <div
       className={`sticky top-0 left-0 flex justify-between px-8 py-4`}
       style={{
-        background: configuration.firstColor,
+        background: configuration?.firstColor,
       }}
     >
       <span
         className={`font-bold cursor-pointer`}
         style={{
-          color: configuration.lightComplementaryColor,
-          fontSize: configuration.fontSize * 1.5,
+          color: configuration?.lightComplementaryColor,
+          fontSize: configuration?.fontSize * 1.5,
         }}
       >
         Sudoku
@@ -26,7 +26,7 @@ export default function TopBar() {
       <div
         className="icons flex gap-4"
         style={{
-          fontSize: configuration.fontSize * 1.2,
+          fontSize: configuration?.fontSize * 1.2,
         }}
       >
         <ChangeTheme />

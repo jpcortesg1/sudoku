@@ -2,11 +2,10 @@
 
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import Theme, { getValidTheme } from "@/enum/Theme";
+import Theme from "@/enum/Theme";
 import ConfigurationState, {
   ConfigurationStateBase,
 } from "@/interface/ConfigurationState";
-import { getCookie } from "cookies-next";
 
 const darkMode: ConfigurationStateBase = {
   fontSize: 16,
@@ -34,12 +33,9 @@ const lightMode: ConfigurationStateBase = {
   warningColor: "#FAFAD2",
 };
 
-const themeCookie = getCookie("theme");
-const currentTheme: Theme = getValidTheme(themeCookie as String);
-
 const initialState: ConfigurationState = {
-  theme: currentTheme,
-  ...(currentTheme === Theme.LIGHT ? lightMode : darkMode),
+  theme: Theme?.LIGHT,
+  ...lightMode,
 };
 
 export const configurationSlice = createSlice({

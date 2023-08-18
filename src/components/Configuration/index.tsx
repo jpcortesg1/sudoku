@@ -14,8 +14,8 @@ export default function Configuration() {
       <button
         className="p-2 rounded-full flex justify-center items-center hover:animate-bounce"
         style={{
-          background: configuration.secondColor,
-          color: configuration.thirdColor,
+          background: configuration?.secondColor,
+          color: configuration?.thirdColor,
         }}
         onClick={handleConfiguration}
       >

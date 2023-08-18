@@ -1,7 +1,12 @@
+"use client"
+
 import TopBar from "@/components/Topbar";
+import useLoadCurrentTheme from "@/hooks/theme/useLoadCurrentTheme";
 import Image from "next/image";
 
 export default function Home() {
+  // useLoadCurrentTheme()
+  
   return (
     <>
       <TopBar />
