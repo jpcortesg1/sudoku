@@ -13,3 +13,5 @@ export default interface ConfigurationState {
   warningColor: string;
   infoColor: string;
 }
+
+export interface ConfigurationStateBase extends Omit<ConfigurationState, "theme"> {}

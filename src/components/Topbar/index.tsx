@@ -1,10 +1,8 @@
 "use client";
 
-import { BsSun, BsMoon } from "react-icons/bs";
-import { IoSettingsOutline } from "react-icons/io5";
-
 import useGetConfiguration from "@/hooks/redux/useGetConfiguration";
-import Theme from "@/enum/Theme";
+import Configuration from "../Configuration";
+import ChangeTheme from "../ChangeTheme";
 
 export default function TopBar() {
   const configuration = useGetConfiguration();
@@ -31,25 +29,9 @@ export default function TopBar() {
           fontSize: configuration.fontSize * 1.2,
         }}
       >
-        <button
-          className="p-2 rounded-full flex justify-center items-center hover:animate-bounce"
-          style={{
-            background: configuration.secondColor,
-            color: configuration.firstColor,
-          }}
-        >
-          {configuration.theme === Theme?.LIGHT ? <BsMoon /> : <BsSun />}
-        </button>
+        <ChangeTheme />
 
-        <button
-          className="p-2 rounded-full flex justify-center items-center hover:animate-bounce"
-          style={{
-            background: configuration.secondColor,
-            color: configuration.firstColor,
-          }}
-        >
-          <IoSettingsOutline />
-        </button>
+        <Configuration />
       </div>
     </div>
   );
