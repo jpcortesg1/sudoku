@@ -1,29 +1,14 @@
+"use client";
+
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-enum Thme {
-  LIGHT = "light",
-  DARK = "dark",
-  PERSONAL = "personal",
-}
-
-export interface ConfigurationState {
-  theme: Thme;
-  fontSize: number;
-  firstColor: string;
-  secondColor: string;
-  thirdColor: string;
-  complementaryColor: string;
-  lightComplementaryColor: string;
-  dangerColor: string;
-  successColor: string;
-  warningColor: string;
-  infoColor: string;
-}
+import Theme from "@/enum/Theme";
+import ConfigurationState from "@/interface/ConfigurationState";
 
 const initialState: ConfigurationState = {
-  theme: Thme.LIGHT,
+  theme: Theme?.LIGHT,
   fontSize: 16,
-  firstColor: "#E0E0E0",
+  firstColor: "#F1F1F1",
   secondColor: "#666666",
   thirdColor: "#111111",
   complementaryColor: "#0000A0",
@@ -38,7 +23,7 @@ export const configurationSlice = createSlice({
   name: "configuration",
   initialState,
   reducers: {
-    setTheme: (state, action: PayloadAction<Thme>) => {
+    setTheme: (state, action: PayloadAction<Theme>) => {
       state.theme = action.payload;
     },
   },
