@@ -9,7 +9,7 @@ export default function TopBar() {
 
   return (
     <div
-      className={`sticky top-0 left-0 flex justify-between px-8 py-4`}
+      className={`sticky top-0 left-0 flex justify-between px-8 py-4 shadow-md`}
       style={{
         background: configuration?.firstColor,
       }}
@@ -17,7 +17,7 @@ export default function TopBar() {
       <span
         className={`font-bold cursor-pointer`}
         style={{
-          color: configuration?.lightComplementaryColor,
+          color: configuration?.complementaryColor,
           fontSize: configuration?.fontSize * 1.5,
         }}
       >
