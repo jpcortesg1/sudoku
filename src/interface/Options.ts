@@ -1,3 +1,3 @@
-export default interface Options {
-  [key: string]: Number[];
+export interface Option {
+  [key: string]: number[];
 }
