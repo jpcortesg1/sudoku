@@ -2,6 +2,7 @@ import useGetConfiguration from "@/hooks/redux/useGetConfiguration";
 import { RootState } from "@/store";
 import { useSelector } from "react-redux";
 import Cell from "../Cell";
+import React from "react";
 
 export default function Sudoku() {
   const { emptySudoku } = useSelector((state: RootState) => state.sudoku);
@@ -12,7 +13,7 @@ export default function Sudoku() {
       {emptySudoku.map((row, i) => (
         <div key={i} className="flex">
           {row.map((col, j) => {
-            let style: any = {
+            let style: React.CSSProperties = {
               borderColor: configuration?.thirdColor,
               color: configuration?.thirdColor,
               backgroundColor: configuration?.firstColor,

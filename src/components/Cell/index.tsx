@@ -1,11 +1,11 @@
 import useGetConfiguration from "@/hooks/redux/useGetConfiguration";
 import { RootState } from "@/store";
-import { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 interface CellProps {
   value: number | null;
-  style: any;
+  style: React.CSSProperties;
   row: Number;
   col: Number;
 }
@@ -17,7 +17,7 @@ export default function Cell(props: CellProps) {
   const [valueElement, setValueElement] = useState<Number | null>(value);
   const { currentCell } = useSelector((state: RootState) => state.sudoku);
 
-  const [style, setStyle] = useState<any>(styleProps);
+  const [style, setStyle] = useState<React.CSSProperties>(styleProps);
   const configuration = useGetConfiguration();
 
   if (row === 0 && col === 0) console.log("Cell", currentCell, row, col);
