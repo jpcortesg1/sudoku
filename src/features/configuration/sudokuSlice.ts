@@ -23,10 +23,14 @@ export const sudokuSlice = createSlice({
     setCurrentCell: (state, action) => {
       state.currentCell = action.payload;
     },
+    setCell: (state, action) => {
+      const { row, col, value } = action.payload;
+      state.emptySudoku[row][col] = value;
+    },
   },
 });
 
-export const { setSudokuSolved, setEmptySudoku, setCurrentCell } =
+export const { setSudokuSolved, setEmptySudoku, setCurrentCell, setCell } =
   sudokuSlice.actions;
 
 export default sudokuSlice.reducer;

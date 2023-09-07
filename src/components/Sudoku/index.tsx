@@ -10,7 +10,7 @@ export default function Sudoku() {
 
   return (
     <div className="w-full md:w-1/2 flex justify-center items-center flex-col">
-      {emptySudoku.map((row, i) => (
+      {emptySudoku?.map((row, i) => (
         <div key={i} className="flex">
           {row.map((col, j) => {
             let style: React.CSSProperties = {
