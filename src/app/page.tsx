@@ -1,17 +1,22 @@
 "use client";
 
-import TopBar from "@/components/Topbar";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+
 import Level from "@/enum/Level";
+import Sudoku from "@/components/Sudoku";
+import TopBar from "@/components/Topbar";
 import useGetConfiguration from "@/hooks/redux/useGetConfiguration";
 import { createSudoku } from "@/utils/sudoku/createSudoku";
 import { solveSudoku, verifySudoku } from "@/utils/sudoku/solveSudoku";
-import { useEffect, useState } from "react";
+import {
+  setEmptySudoku,
+  setSudokuSolved,
+} from "@/features/configuration/sudokuSlice";
 
 export default function Home() {
   const configuration = useGetConfiguration();
-  const [solvedSudoku, setSolvedSudoku] = useState(null);
-  const [sudokuToSolve, setSudokuToSolve] = useState(null);
-  const [cont, setCOnt] = useState(0);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let next = true;
@@ -22,17 +27,19 @@ export default function Home() {
       const emptySudoku = sudokuSolved.map((row) => [...row]);
       solveSudoku(sudokuSolved);
       if (verifySudoku(sudokuSolved)) {
-        setCOnt(cont);
-        setSolvedSudoku(sudokuSolved as any);
-        setSudokuToSolve(emptySudoku as any);
+        dispatch(setSudokuSolved(sudokuSolved));
+        dispatch(setEmptySudoku(emptySudoku));
         next = false;
       }
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
       <TopBar />
+      <main className="flex justify-between px-8 py-4">
+        <Sudoku />
+      </main>
       <div className="h-min-[100vh] pt-4">
         <div className="container w-[90%] m-auto gap-4 flex flex-wrap justify-between">
           {Object.keys(configuration).map((key) => {
