@@ -17,6 +17,7 @@ export default function Sudoku() {
               borderColor: configuration?.thirdColor,
               color: configuration?.thirdColor,
               backgroundColor: configuration?.firstColor,
+              cursor: "pointer",
             };
 
             if (i === 0) style = { ...style, borderTopWidth: 4 };
