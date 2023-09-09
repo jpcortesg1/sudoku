@@ -1,4 +1,8 @@
-import { setCell, setCurrentCell } from "@/features/configuration/sudokuSlice";
+import {
+  addError,
+  setCell,
+  setCurrentCell,
+} from "@/features/configuration/sudokuSlice";
 import useGetConfiguration from "@/hooks/redux/useGetConfiguration";
 import { RootState } from "@/store";
 import React, { ChangeEvent, useEffect, useState } from "react";
@@ -15,11 +19,12 @@ export default function Cell(props: CellProps) {
   const { value, style: styleProps, row, col } = props;
 
   const regrex = /^[0-9]$/; // Only numbers from 0 to 9, 1 digit
-  const [valueElement, setValueElement] = useState<number | null>(value);
+  // const [valueElement, setValueElement] = useState<number | null>(value);
   const { currentCell, sudokuSolved, emptySudoku } = useSelector(
     (state: RootState) => state.sudoku
   );
   const [isValid, setIsValid] = useState<boolean>(false);
+  const [haveError, setHaveError] = useState<boolean>(false);
 
   const dispatch = useDispatch();
 
@@ -32,13 +37,17 @@ export default function Cell(props: CellProps) {
     const lastValue = valueInput[valueInput.length - 1];
     const canBe = regrex.test(lastValue);
     if (!canBe) return;
-    setValueElement(Number(lastValue));
+    dispatch(
+      setCell({
+        row,
+        col,
+        value: Number(lastValue),
+      })
+    );
   };
 
   // Function to detect cliked
   const handleClick = () => {
-    console.log(isValid);
-    console.log(sudokuSolved[row][col], emptySudoku[row][col]);
     dispatch(
       setCurrentCell({
         row,
@@ -74,7 +83,7 @@ export default function Cell(props: CellProps) {
         background: configuration?.lightComplementaryColor,
       }));
     }
-    if (selected !== null && selected === valueElement) {
+    if (selected !== null && selected === emptySudoku[row][col]) {
       setStyle((prev) => ({
         ...prev,
         background: configuration?.complementaryColor,
@@ -85,7 +94,7 @@ export default function Cell(props: CellProps) {
         currentCell?.col === col ||
         (isRow && isCol)) &&
       selected !== null &&
-      selected === valueElement
+      selected === emptySudoku[row][col]
     ) {
       setStyle((prev) => ({
         ...prev,
@@ -107,23 +116,23 @@ export default function Cell(props: CellProps) {
     configuration?.complementaryColor,
     configuration?.dangerColor,
     emptySudoku,
-    valueElement,
   ]);
 
   // Check each time the value changes
   useEffect(() => {
     const correctValue = sudokuSolved[row][col];
-    if (valueElement === null) return;
+    if (emptySudoku[row][col] === null) return;
 
     dispatch(
       setCell({
         row,
         col,
-        value: valueElement,
+        value: emptySudoku[row][col],
       })
     );
 
-    if (valueElement === correctValue) return;
+    if (emptySudoku[row][col] === correctValue) return;
+    setHaveError(true);
 
     setStyle((prev) => ({
       ...prev,
@@ -131,7 +140,6 @@ export default function Cell(props: CellProps) {
     }));
     return;
   }, [
-    valueElement,
     row,
     col,
     sudokuSolved,
@@ -139,6 +147,12 @@ export default function Cell(props: CellProps) {
     dispatch,
     emptySudoku,
   ]);
+
+  // Add error only one time
+  useEffect(() => {
+    if (!haveError) return;
+    dispatch(addError());
+  }, [haveError, dispatch]);
 
   // Check each time the sudokuSolved changes
   useEffect(() => {
@@ -151,11 +165,10 @@ export default function Cell(props: CellProps) {
       style={{
         ...style,
         caretColor: "transparent",
-        // background: "green",
       }}
       onClick={handleClick}
     >
-      {valueElement + ""}
+      {emptySudoku[row][col] + ""}
     </div>
   ) : (
     <input
@@ -170,7 +183,7 @@ export default function Cell(props: CellProps) {
             : configuration.dangerColor,
       }}
       onChange={handleChange}
-      value={valueElement || ""}
+      value={emptySudoku[row][col] || ""}
       onClick={handleClick}
     />
   );

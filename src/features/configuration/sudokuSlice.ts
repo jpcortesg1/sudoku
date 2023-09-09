@@ -8,6 +8,7 @@ const initialState: SudokuState = {
     row: 0,
     col: 0,
   },
+  errors: 0,
 };
 
 export const sudokuSlice = createSlice({
@@ -27,10 +28,18 @@ export const sudokuSlice = createSlice({
       const { row, col, value } = action.payload;
       state.emptySudoku[row][col] = value;
     },
+    addError: (state) => {
+      state.errors++;
+    },
   },
 });
 
-export const { setSudokuSolved, setEmptySudoku, setCurrentCell, setCell } =
-  sudokuSlice.actions;
+export const {
+  setSudokuSolved,
+  setEmptySudoku,
+  setCurrentCell,
+  setCell,
+  addError,
+} = sudokuSlice.actions;
 
 export default sudokuSlice.reducer;

@@ -7,4 +7,5 @@ export default interface SudokuState {
     row: number;
     col: number;
   };
+  errors: number;
 }

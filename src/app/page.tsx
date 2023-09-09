@@ -13,6 +13,8 @@ import {
   setEmptySudoku,
   setSudokuSolved,
 } from "@/features/configuration/sudokuSlice";
+import NumberPanel from "@/components/NumberPanel";
+import Errors from "@/components/Erros";
 
 export default function Home() {
   const configuration = useGetConfiguration();
@@ -37,8 +39,15 @@ export default function Home() {
   return (
     <>
       <TopBar />
-      <main className="flex justify-between px-8 py-4">
+      <main className="flex flex-wrap justify-between px-8 py-4">
         <Sudoku />
+        <div className="w-full md:w-1/2 flex justify-between items-center flex-col">
+          <div className="actions">
+            <Errors />
+          </div>
+          <NumberPanel />
+          <div className="new-game">new game</div>
+        </div>
       </main>
       <div className="h-min-[100vh] pt-4">
         <div className="container w-[90%] m-auto gap-4 flex flex-wrap justify-between">
