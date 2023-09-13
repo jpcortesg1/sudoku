@@ -14,10 +14,10 @@ export default function Sudoku() {
         <div key={i} className="flex">
           {row.map((col, j) => {
             let style: React.CSSProperties = {
-              borderColor: configuration?.thirdColor,
               color: configuration?.thirdColor,
               backgroundColor: configuration?.firstColor,
               cursor: "pointer",
+              borderColor: configuration?.thirdColor,
             };
 
             if (i === 0) style = { ...style, borderTopWidth: 4 };

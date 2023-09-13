@@ -65,6 +65,10 @@ export default function Cell(props: CellProps) {
     const isRow = rows.includes(currentCell?.row);
     const isCol = cols.includes(currentCell?.col);
     const selected = emptySudoku[currentCell?.row][currentCell?.col];
+    setStyle((prev) => ({
+      ...prev,
+      color: configuration?.thirdColor,
+    }));
     if (currentCell?.row !== row && currentCell?.col !== col) {
       setStyle((prev) => ({
         ...prev,
@@ -87,6 +91,7 @@ export default function Cell(props: CellProps) {
       setStyle((prev) => ({
         ...prev,
         background: configuration?.complementaryColor,
+        color: configuration?.firstColor,
       }));
     }
     if (
@@ -115,6 +120,7 @@ export default function Cell(props: CellProps) {
     configuration?.lightComplementaryColor,
     configuration?.complementaryColor,
     configuration?.dangerColor,
+    configuration?.thirdColor,
     emptySudoku,
   ]);
 
@@ -159,12 +165,18 @@ export default function Cell(props: CellProps) {
     setIsValid(sudokuSolved[row][col] === emptySudoku[row][col]);
   }, [sudokuSolved, emptySudoku, row, col]);
 
+  if (row === 0 && col === 0) {
+    console.log(style);
+  }
+
   return isValid ? (
     <div
       className="w-14 border-b-2 border-r-2	h-14 flex justify-center items-center text-2xl"
       style={{
         ...style,
         caretColor: "transparent",
+        borderColor: configuration?.thirdColor,
+        color: style?.color || configuration?.thirdColor,
       }}
       onClick={handleClick}
     >
@@ -177,9 +189,11 @@ export default function Cell(props: CellProps) {
       style={{
         ...style,
         caretColor: "transparent",
+        borderColor: configuration?.thirdColor,
+        color: style?.color || configuration.thirdColor,
         background:
           isValid || value === null
-            ? style.background
+            ? style?.background
             : configuration.dangerColor,
       }}
       onChange={handleChange}
