@@ -9,6 +9,7 @@ const initialState: SudokuState = {
     col: 0,
   },
   errors: 0,
+  isEditMode: false,
 };
 
 export const sudokuSlice = createSlice({
@@ -31,6 +32,9 @@ export const sudokuSlice = createSlice({
     addError: (state) => {
       state.errors++;
     },
+    toggleEditMode: (state) => {
+      state.isEditMode = !state.isEditMode;
+    },
   },
 });
 
@@ -40,6 +44,7 @@ export const {
   setCurrentCell,
   setCell,
   addError,
+  toggleEditMode,
 } = sudokuSlice.actions;
 
 export default sudokuSlice.reducer;

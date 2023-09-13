@@ -19,7 +19,6 @@ export default function Cell(props: CellProps) {
   const { value, style: styleProps, row, col } = props;
 
   const regrex = /^[0-9]$/; // Only numbers from 0 to 9, 1 digit
-  // const [valueElement, setValueElement] = useState<number | null>(value);
   const { currentCell, sudokuSolved, emptySudoku } = useSelector(
     (state: RootState) => state.sudoku
   );
@@ -164,10 +163,6 @@ export default function Cell(props: CellProps) {
   useEffect(() => {
     setIsValid(sudokuSolved[row][col] === emptySudoku[row][col]);
   }, [sudokuSolved, emptySudoku, row, col]);
-
-  if (row === 0 && col === 0) {
-    console.log(style);
-  }
 
   return isValid ? (
     <div

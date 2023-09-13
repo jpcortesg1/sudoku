@@ -8,4 +8,5 @@ export default interface SudokuState {
     col: number;
   };
   errors: number;
+  isEditMode: boolean;
 }
