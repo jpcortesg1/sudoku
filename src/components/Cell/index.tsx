@@ -7,6 +7,7 @@ import useGetConfiguration from "@/hooks/redux/useGetConfiguration";
 import { RootState } from "@/store";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import EmptyCell from "./EmptyCell";
 
 interface CellProps {
   value: number | null;
@@ -18,32 +19,15 @@ interface CellProps {
 export default function Cell(props: CellProps) {
   const { value, style: styleProps, row, col } = props;
 
-  const regrex = /^[0-9]$/; // Only numbers from 0 to 9, 1 digit
-  const { currentCell, sudokuSolved, emptySudoku } = useSelector(
+  const { currentCell, emptySudoku } = useSelector(
     (state: RootState) => state.sudoku
   );
   const [isValid, setIsValid] = useState<boolean>(false);
-  const [haveError, setHaveError] = useState<boolean>(false);
 
   const dispatch = useDispatch();
 
   const [style, setStyle] = useState<React.CSSProperties>(styleProps);
   const configuration = useGetConfiguration();
-
-  // Function to check if the value can be setted
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value: valueInput } = e.target;
-    const lastValue = valueInput[valueInput.length - 1];
-    const canBe = regrex.test(lastValue);
-    if (!canBe) return;
-    dispatch(
-      setCell({
-        row,
-        col,
-        value: Number(lastValue),
-      })
-    );
-  };
 
   // Function to detect cliked
   const handleClick = () => {
@@ -123,47 +107,6 @@ export default function Cell(props: CellProps) {
     emptySudoku,
   ]);
 
-  // Check each time the value changes
-  useEffect(() => {
-    const correctValue = sudokuSolved[row][col];
-    if (emptySudoku[row][col] === null) return;
-
-    dispatch(
-      setCell({
-        row,
-        col,
-        value: emptySudoku[row][col],
-      })
-    );
-
-    if (emptySudoku[row][col] === correctValue) return;
-    setHaveError(true);
-
-    setStyle((prev) => ({
-      ...prev,
-      background: configuration?.dangerColor,
-    }));
-    return;
-  }, [
-    row,
-    col,
-    sudokuSolved,
-    configuration?.dangerColor,
-    dispatch,
-    emptySudoku,
-  ]);
-
-  // Add error only one time
-  useEffect(() => {
-    if (!haveError) return;
-    dispatch(addError());
-  }, [haveError, dispatch]);
-
-  // Check each time the sudokuSolved changes
-  useEffect(() => {
-    setIsValid(sudokuSolved[row][col] === emptySudoku[row][col]);
-  }, [sudokuSolved, emptySudoku, row, col]);
-
   return isValid ? (
     <div
       className="w-14 border-b-2 border-r-2	h-14 flex justify-center items-center text-2xl"
@@ -178,22 +121,14 @@ export default function Cell(props: CellProps) {
       {emptySudoku[row][col] + ""}
     </div>
   ) : (
-    <input
-      type="text"
-      className="w-14 border-b-2 border-r-2	h-14 flex justify-center items-center text-2xl text-center focus:outline-none"
-      style={{
-        ...style,
-        caretColor: "transparent",
-        borderColor: configuration?.thirdColor,
-        color: style?.color || configuration.thirdColor,
-        background:
-          isValid || value === null
-            ? style?.background
-            : configuration.dangerColor,
-      }}
-      onChange={handleChange}
-      value={emptySudoku[row][col] || ""}
-      onClick={handleClick}
+    <EmptyCell
+      style={style}
+      row={row}
+      col={col}
+      isValid={isValid}
+      value={value}
+      setStyle={setStyle}
+      setIsValid={setIsValid}
     />
   );
 }
