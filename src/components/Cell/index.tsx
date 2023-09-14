@@ -1,11 +1,7 @@
-import {
-  addError,
-  setCell,
-  setCurrentCell,
-} from "@/features/configuration/sudokuSlice";
+import { setCurrentCell } from "@/features/configuration/sudokuSlice";
 import useGetConfiguration from "@/hooks/redux/useGetConfiguration";
 import { RootState } from "@/store";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import EmptyCell from "./EmptyCell";
 

@@ -1,3 +1,6 @@
+import React, { ChangeEvent, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   addError,
   setCell,
@@ -5,8 +8,6 @@ import {
 } from "@/features/configuration/sudokuSlice";
 import useGetConfiguration from "@/hooks/redux/useGetConfiguration";
 import { RootState } from "@/store";
-import React, { ChangeEvent, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 interface EmptyCellProps {
   style: React.CSSProperties;
@@ -99,22 +100,41 @@ export default function EmptyCell(props: EmptyCellProps) {
   }, [sudokuSolved, emptySudoku, row, col, setIsValid]);
 
   return (
-    <input
-      type="text"
-      className="w-14 border-b-2 border-r-2	h-14 flex justify-center items-center text-2xl text-center focus:outline-none"
-      style={{
-        ...style,
-        caretColor: "transparent",
-        borderColor: configuration?.thirdColor,
-        color: style?.color || configuration.thirdColor,
-        background:
-          isValid || value === null
-            ? style?.background
-            : configuration.dangerColor,
-      }}
-      onChange={handleChange}
-      value={emptySudoku[row][col] || ""}
-      onClick={handleClick}
-    />
+    <div className="relative">
+      <input
+        type="text"
+        className="w-14	h-14 flex justify-center items-center text-2xl text-center focus:outline-none"
+        style={{
+          caretColor: "transparent",
+          background: "transparent",
+        }}
+        onChange={handleChange}
+        value={emptySudoku[row][col] || ""}
+        onClick={handleClick}
+      />
+      <div
+        className="absolute left-0 top-0 bg-slate-300 w-full h-full border-b-2 border-r-2 grid-rows-3 grid-cols-3 grid text-xs justify-items-center p-1"
+        style={{
+          ...style,
+          pointerEvents: "none",
+          borderColor: configuration?.thirdColor,
+          color: style?.color || configuration.thirdColor,
+          background:
+            isValid || value === null
+              ? style?.background
+              : configuration.dangerColor,
+        }}
+      >
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>5</span>
+        <span>6</span>
+        <span>7</span>
+        <span>8</span>
+        <span>9</span>
+      </div>
+    </div>
   );
 }
