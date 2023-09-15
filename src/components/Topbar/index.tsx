@@ -9,7 +9,7 @@ export default function TopBar() {
 
   return (
     <div
-      className={`sticky top-0 left-0 flex justify-between px-8 py-4 shadow-md`}
+      className={`sticky top-0 left-0 flex justify-between px-8 py-4 shadow-md z-50`}
       style={{
         background: configuration?.firstColor,
       }}

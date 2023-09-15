@@ -1,4 +1,4 @@
-import { setCell } from "@/features/configuration/sudokuSlice";
+import { setCell, setCurrentPanel } from "@/features/configuration/sudokuSlice";
 import useGetConfiguration from "@/hooks/redux/useGetConfiguration";
 import { RootState } from "@/store";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,13 +6,15 @@ import { useDispatch, useSelector } from "react-redux";
 export default function NumberPanel() {
   const panel = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const configuration = useGetConfiguration();
-  const { emptySudoku, currentCell, sudokuSolved } = useSelector(
+  const { emptySudoku, currentCell, sudokuSolved, isEditMode } = useSelector(
     (state: RootState) => state.sudoku
   );
   const { row, col } = currentCell;
   const dispatch = useDispatch();
 
   const handleClick = (number: number) => {
+    dispatch(setCurrentPanel(number));
+    if (isEditMode) return;
     if (emptySudoku[row][col] === sudokuSolved[row][col]) return;
 
     dispatch(

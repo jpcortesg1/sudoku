@@ -9,4 +9,5 @@ export default interface SudokuState {
   };
   errors: number;
   isEditMode: boolean;
+  currentPanel: number | null;
 }
