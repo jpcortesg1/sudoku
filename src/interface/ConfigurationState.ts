@@ -2,7 +2,7 @@ import Theme from "@/enum/Theme";
 
 export default interface ConfigurationState {
   theme: Theme;
-  fontSize: Number;
+  fontSize: number;
   firstColor: string;
   secondColor: string;
   thirdColor: string;
@@ -14,4 +14,5 @@ export default interface ConfigurationState {
   infoColor: string;
 }
 
-export interface ConfigurationStateBase extends Omit<ConfigurationState, "theme"> {}
+export interface ConfigurationStateBase
+  extends Omit<ConfigurationState, "theme"> {}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import Level from "@/enum/Level";
@@ -17,10 +17,12 @@ import NumberPanel from "@/components/NumberPanel";
 import Errors from "@/components/Erros";
 import ButtonNotes from "@/components/ButtonNotes";
 import ClearCell from "@/components/clearCell";
+import PopUp from "@/components/PopUp";
 
 export default function Home() {
   const configuration = useGetConfiguration();
   const dispatch = useDispatch();
+  const [show, setShow] = useState(true);
 
   useEffect(() => {
     let next = true;
@@ -34,12 +36,14 @@ export default function Home() {
         dispatch(setSudokuSolved(sudokuSolved));
         dispatch(setEmptySudoku(emptySudoku));
         next = false;
+        setShow(false);
       }
     }
   }, [dispatch]);
 
   return (
     <>
+      <PopUp show={show} />
       <TopBar />
       <main className="flex flex-wrap justify-between px-8 py-4">
         <Sudoku />
