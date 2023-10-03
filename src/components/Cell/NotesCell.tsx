@@ -1,4 +1,5 @@
 import { setCurrentPanel } from "@/features/configuration/sudokuSlice";
+import useGetConfiguration from "@/hooks/redux/useGetConfiguration";
 import { RootState } from "@/store";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,6 +20,7 @@ export default function NotesCell(props: NotesCellProps) {
     }))
   );
   const [iscorrect, setIsCorrect] = useState<boolean>(false);
+  const configuration = useGetConfiguration();
 
   const { isEditMode, currentCell, currentPanel, emptySudoku } = useSelector(
     (state: RootState) => state.sudoku
@@ -86,6 +88,10 @@ export default function NotesCell(props: NotesCellProps) {
           style={{
             visibility: !iscorrect && note.active ? "visible" : "hidden",
             cursor: "pointer",
+            color:
+              row === currentCell?.row && col === currentCell?.col
+                ? configuration?.firstColor
+                : configuration.thirdColor,
           }}
           key={note.value}
         >

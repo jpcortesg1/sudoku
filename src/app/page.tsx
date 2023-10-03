@@ -16,6 +16,7 @@ import {
 import NumberPanel from "@/components/NumberPanel";
 import Errors from "@/components/Erros";
 import ButtonNotes from "@/components/ButtonNotes";
+import ClearCell from "@/components/clearCell";
 
 export default function Home() {
   const configuration = useGetConfiguration();
@@ -46,6 +47,7 @@ export default function Home() {
           <div className="actions flex justify-center items-center gap-4">
             <Errors />
             <ButtonNotes />
+            <ClearCell />
           </div>
           <NumberPanel />
           <div className="new-game">new game</div>
