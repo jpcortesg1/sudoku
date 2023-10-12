@@ -1,4 +1,9 @@
+interface PopUp {
+  show: boolean;
+  showCloseButton: boolean;
+}
+
 export default interface PopUpsState {
   showCreateSudoku: boolean;
-  showCreateNewGame: boolean;
+  createNewGame: PopUp;
 }

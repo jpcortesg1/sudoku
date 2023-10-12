@@ -3,7 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: PopUpsState = {
   showCreateSudoku: true,
-  showCreateNewGame: false,
+  createNewGame: {
+    show: false,
+    showCloseButton: false,
+  },
 };
 
 export const popUpsSlice = createSlice({
@@ -17,10 +20,16 @@ export const popUpsSlice = createSlice({
       state.showCreateSudoku = true;
     },
     closeShowCreateNewGame: (state) => {
-      state.showCreateNewGame = false;
+      state.createNewGame.show = false;
     },
     openShowCreateNewGame: (state) => {
-      state.showCreateNewGame = true;
+      state.createNewGame.show = true;
+    },
+    canSeeCloseButtonNewGame: (state) => {
+      state.createNewGame.showCloseButton = true;
+    },
+    cannotSeeCloseButtonNewGame: (state) => {
+      state.createNewGame.showCloseButton = false;
     },
   },
 });
@@ -30,6 +39,8 @@ export const {
   openShowCreateSudoku,
   closeShowCreateNewGame,
   openShowCreateNewGame,
+  canSeeCloseButtonNewGame,
+  cannotSeeCloseButtonNewGame,
 } = popUpsSlice.actions;
 
 export default popUpsSlice.reducer;
