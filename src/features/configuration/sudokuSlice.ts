@@ -11,6 +11,7 @@ const initialState: SudokuState = {
   errors: 0,
   isEditMode: false,
   currentPanel: null,
+  clcikedDeleteButton: false,
 };
 
 export const sudokuSlice = createSlice({
@@ -39,6 +40,9 @@ export const sudokuSlice = createSlice({
     setCurrentPanel: (state, action) => {
       state.currentPanel = action.payload;
     },
+    toggleDeleteButton: (state)=> {
+      state.clcikedDeleteButton = !state.clcikedDeleteButton
+    }
   },
 });
 
@@ -50,6 +54,7 @@ export const {
   addError,
   toggleEditMode,
   setCurrentPanel,
+  toggleDeleteButton
 } = sudokuSlice.actions;
 
 export default sudokuSlice.reducer;

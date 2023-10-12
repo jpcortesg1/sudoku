@@ -22,7 +22,7 @@ export default function NotesCell(props: NotesCellProps) {
   const [iscorrect, setIsCorrect] = useState<boolean>(false);
   const configuration = useGetConfiguration();
 
-  const { isEditMode, currentCell, currentPanel, emptySudoku } = useSelector(
+  const { isEditMode, currentCell, currentPanel, emptySudoku,clcikedDeleteButton } = useSelector(
     (state: RootState) => state.sudoku
   );
   const dispatch = useDispatch();
@@ -73,6 +73,21 @@ export default function NotesCell(props: NotesCellProps) {
       ]);
     }
   }, [currentCell, col, row, emptySudoku]);
+
+  // Listen when clicked delete button
+  /* eslint-disable */
+  useEffect(() => {
+    const { row: currentRow, col: currentCol } = currentCell;
+    if (currentCol === col && currentRow === row) {
+      setNotes((current) => 
+        current.map((note) => ({
+          ...note,
+          active: false
+        }))
+      )
+    }
+  }, [clcikedDeleteButton, row, col])
+  /* eslint-enable */
 
   return (
     <div
