@@ -1,4 +1,4 @@
-import { setCell, setCurrentPanel } from "@/features/configuration/sudokuSlice";
+import { setCell, setCurrentPanel } from "@/features/sudoku/sudokuSlice";
 import useGetConfiguration from "@/hooks/redux/useGetConfiguration";
 import { RootState } from "@/store";
 import { useDispatch, useSelector } from "react-redux";

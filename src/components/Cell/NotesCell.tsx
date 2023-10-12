@@ -1,4 +1,4 @@
-import { setCurrentPanel } from "@/features/configuration/sudokuSlice";
+import { setCurrentPanel } from "@/features/sudoku/sudokuSlice";
 import useGetConfiguration from "@/hooks/redux/useGetConfiguration";
 import { RootState } from "@/store";
 import React, { useEffect, useState } from "react";
@@ -22,9 +22,13 @@ export default function NotesCell(props: NotesCellProps) {
   const [iscorrect, setIsCorrect] = useState<boolean>(false);
   const configuration = useGetConfiguration();
 
-  const { isEditMode, currentCell, currentPanel, emptySudoku,clcikedDeleteButton } = useSelector(
-    (state: RootState) => state.sudoku
-  );
+  const {
+    isEditMode,
+    currentCell,
+    currentPanel,
+    emptySudoku,
+    clcikedDeleteButton,
+  } = useSelector((state: RootState) => state.sudoku);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -79,14 +83,14 @@ export default function NotesCell(props: NotesCellProps) {
   useEffect(() => {
     const { row: currentRow, col: currentCol } = currentCell;
     if (currentCol === col && currentRow === row) {
-      setNotes((current) => 
+      setNotes((current) =>
         current.map((note) => ({
           ...note,
-          active: false
+          active: false,
         }))
-      )
+      );
     }
-  }, [clcikedDeleteButton, row, col])
+  }, [clcikedDeleteButton, row, col]);
   /* eslint-enable */
 
   return (

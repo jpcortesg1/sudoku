@@ -1,4 +1,4 @@
-import { setCell, toggleDeleteButton } from "@/features/configuration/sudokuSlice";
+import { setCell, toggleDeleteButton } from "@/features/sudoku/sudokuSlice";
 import useGetConfiguration from "@/hooks/redux/useGetConfiguration";
 import { RootState } from "@/store";
 import { BsTrash } from "react-icons/bs";
@@ -13,7 +13,7 @@ export default function ClearCell() {
 
   const handleDelete = () => {
     const { row, col } = currentCell;
-    dispatch(toggleDeleteButton())
+    dispatch(toggleDeleteButton());
     if (
       emptySudoku[row][col] === null ||
       emptySudoku[row][col] === sudokuSolved[row][col]

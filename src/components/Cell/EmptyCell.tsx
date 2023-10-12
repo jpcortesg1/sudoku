@@ -5,7 +5,7 @@ import {
   addError,
   setCell,
   setCurrentCell,
-} from "@/features/configuration/sudokuSlice";
+} from "@/features/sudoku/sudokuSlice";
 import useGetConfiguration from "@/hooks/redux/useGetConfiguration";
 import { RootState } from "@/store";
 import NotesCell from "./NotesCell";

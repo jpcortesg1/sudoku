@@ -1,4 +1,4 @@
-import { toggleEditMode } from "@/features/configuration/sudokuSlice";
+import { toggleEditMode } from "@/features/sudoku/sudokuSlice";
 import useGetConfiguration from "@/hooks/redux/useGetConfiguration";
 import { RootState } from "@/store";
 import { BiEdit } from "react-icons/bi";

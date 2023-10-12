@@ -1,4 +1,4 @@
-import { setCurrentCell } from "@/features/configuration/sudokuSlice";
+import { setCurrentCell } from "@/features/sudoku/sudokuSlice";
 import useGetConfiguration from "@/hooks/redux/useGetConfiguration";
 import { RootState } from "@/store";
 import React, { useEffect, useState } from "react";
@@ -103,7 +103,7 @@ export default function Cell(props: CellProps) {
     emptySudoku,
   ]);
 
-  return isValid ? (
+  return isValid && value !== null ? (
     <div
       className="w-14 border-b-2 border-r-2	h-14 flex justify-center items-center text-2xl"
       style={{
