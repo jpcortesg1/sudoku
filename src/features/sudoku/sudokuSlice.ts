@@ -19,6 +19,15 @@ export const sudokuSlice = createSlice({
   name: "sudoku",
   initialState,
   reducers: {
+    setCreateNewSudoku: (state) => {
+      state.currentCell.row = 0;
+      state.currentCell.col = 0;
+      state.errors = 0;
+      state.isEditMode = false;
+      state.currentPanel = null;
+      state.clcikedDeleteButton = false;
+      state.clues = 3;
+    },
     setSudokuSolved: (state, action) => {
       state.sudokuSolved = action.payload;
     },
@@ -61,6 +70,7 @@ export const {
   setCurrentPanel,
   toggleDeleteButton,
   subtractClue,
+  setCreateNewSudoku,
 } = sudokuSlice.actions;
 
 export default sudokuSlice.reducer;

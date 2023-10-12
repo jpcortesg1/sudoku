@@ -9,7 +9,11 @@ import {
   openShowCreateNewGame,
   openShowCreateSudoku,
 } from "@/features/popUps/poUpsSlice";
-import { setEmptySudoku, setSudokuSolved } from "@/features/sudoku/sudokuSlice";
+import {
+  setCreateNewSudoku,
+  setEmptySudoku,
+  setSudokuSolved,
+} from "@/features/sudoku/sudokuSlice";
 import useGetConfiguration from "@/hooks/redux/useGetConfiguration";
 import { RootState } from "@/store";
 import { createSudoku } from "@/utils/sudoku/createSudoku";
@@ -42,6 +46,7 @@ export default function NewGameButton() {
   const handleCreateNewGame = (level: Level) => {
     dispatch(openShowCreateSudoku());
     dispatch(closeShowCreateNewGame());
+    dispatch(setCreateNewSudoku());
     setTimeout(() => {
       help(level);
     }, 100);

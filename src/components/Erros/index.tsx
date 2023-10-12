@@ -1,11 +1,25 @@
+import {
+  cannotSeeCloseButtonNewGame,
+  openShowCreateNewGame,
+} from "@/features/popUps/poUpsSlice";
 import useGetConfiguration from "@/hooks/redux/useGetConfiguration";
 import { RootState } from "@/store";
+import { useEffect } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Errors() {
   const { errors } = useSelector((state: RootState) => state.sudoku);
   const configuration = useGetConfiguration();
+  const dispatch = useDispatch();
+
+  // Force user to start a new game
+  useEffect(() => {
+    if (errors < 3) return;
+    dispatch(cannotSeeCloseButtonNewGame());
+    dispatch(openShowCreateNewGame());
+  }, [errors, dispatch]);
+
   return (
     <div className="flex flex-col justify-center items-center">
       <div
