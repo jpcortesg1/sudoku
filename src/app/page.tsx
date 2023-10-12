@@ -18,6 +18,7 @@ import Errors from "@/components/Erros";
 import ButtonNotes from "@/components/ButtonNotes";
 import ClearCell from "@/components/clearCell";
 import PopUp from "@/components/PopUp";
+import ClueButton from "@/components/ClueButton";
 
 export default function Home() {
   const configuration = useGetConfiguration();
@@ -52,6 +53,7 @@ export default function Home() {
             <Errors />
             <ButtonNotes />
             <ClearCell />
+            <ClueButton />
           </div>
           <NumberPanel />
           <div className="new-game">new game</div>

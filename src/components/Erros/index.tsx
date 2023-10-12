@@ -9,7 +9,7 @@ export default function Errors() {
   return (
     <div className="flex flex-col justify-center items-center">
       <div
-        className="rounded-full p-2 relative"
+        className="rounded-full p-2 relative cursor-pointer"
         style={{
           background: configuration.secondColor,
         }}

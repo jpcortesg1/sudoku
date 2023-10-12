@@ -11,4 +11,5 @@ export default interface SudokuState {
   isEditMode: boolean;
   currentPanel: number | null;
   clcikedDeleteButton: boolean;
+  clues: number;
 }
