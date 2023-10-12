@@ -105,7 +105,7 @@ export default function Cell(props: CellProps) {
 
   return isValid && value !== null ? (
     <div
-      className="w-14 border-b-2 border-r-2	h-14 flex justify-center items-center text-2xl"
+      className="w-10 border-b-2 border-r-2	h-1w-10 flex justify-center items-center text-2xl md:w-14 md:h-14"
       style={{
         ...style,
         caretColor: "transparent",

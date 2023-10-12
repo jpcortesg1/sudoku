@@ -9,7 +9,7 @@ export default function Sudoku() {
   const configuration = useGetConfiguration();
 
   return (
-    <div className="w-full md:w-1/2 flex justify-center items-center flex-col">
+    <div className=" flex justify-center items-center flex-col">
       {emptySudoku?.map((row, i) => (
         <div key={i} className="flex">
           {row.map((col, j) => {

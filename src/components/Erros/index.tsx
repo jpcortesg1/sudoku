@@ -15,7 +15,7 @@ export default function Errors() {
 
   // Force user to start a new game
   useEffect(() => {
-    if (errors < 3) return;
+    if (errors <= 3) return;
     dispatch(cannotSeeCloseButtonNewGame());
     dispatch(openShowCreateNewGame());
   }, [errors, dispatch]);

@@ -27,11 +27,13 @@ export default function NumberPanel() {
   };
 
   return (
-    <div className="grid grid-cols-3 grid-rows-3 gap-4">
-      {panel.map((number) => {
+    <div className="grid grid-cols-3 grid-rows-3 gap-4  justify-items-center">
+      {panel.map((number, i) => {
         return (
           <div
-            className="p-7 rounded-md cursor-pointer text-3xl flex justify-center items-center hover:scale-110"
+            className={`px-5 py-3 rounded-md cursor-pointer text-3xl text-center hover:scale-110 justify-self-${
+              i % 3 === 0 ? "end" : i % 3 === 1 ? "center" : "start"
+            } ${i === 0 && "px-6"} text-center`}
             key={number}
             style={{
               background: configuration?.firstColor,

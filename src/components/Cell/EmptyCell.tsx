@@ -118,7 +118,7 @@ export default function EmptyCell(props: EmptyCellProps) {
       />
       <input
         type="text"
-        className="w-14	h-14 flex justify-center items-center text-2xl text-center focus:outline-none"
+        className="w-10	h-10 flex justify-center items-center text-2xl text-center focus:outline-none md:w-14 md:h-14"
         style={{
           caretColor: "transparent",
           background: "transparent",
@@ -128,6 +128,8 @@ export default function EmptyCell(props: EmptyCellProps) {
         onChange={handleChange}
         value={emptySudoku[row][col] || ""}
         onClick={handleClick}
+        // No see keyboard in cellphone
+        readOnly
       />
     </div>
   );

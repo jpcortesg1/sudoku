@@ -21,7 +21,6 @@ import { RootState } from "@/store";
 import { closeShowCreateSudoku } from "@/features/popUps/poUpsSlice";
 
 export default function Home() {
-  const configuration = useGetConfiguration();
   const dispatch = useDispatch();
   const { showCreateSudoku } = useSelector((root: RootState) => root.popUp);
 
@@ -46,9 +45,10 @@ export default function Home() {
     <>
       <PopUp show={showCreateSudoku} />
       <TopBar />
-      <main className="flex flex-wrap justify-between px-8 py-4">
+      <main className="flex flex-col justify-center gap-8 px-8 py-4 md:flex-row">
         <Sudoku />
-        <div className="w-full md:w-1/2 flex justify-between items-center flex-col">
+
+        <div className="flex justify-between  flex-col gap-3">
           <div className="actions flex justify-center items-center gap-4">
             <Errors />
             <ButtonNotes />
