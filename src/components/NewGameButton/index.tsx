@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Level from "@/enum/Level";
 import {
   canSeeCloseButtonNewGame,
+  cannotSeeCloseButtonNewGame,
   closeShowCreateNewGame,
   closeShowCreateSudoku,
   openShowCreateNewGame,
@@ -18,6 +19,7 @@ import useGetConfiguration from "@/hooks/redux/useGetConfiguration";
 import { RootState } from "@/store";
 import { createSudoku } from "@/utils/sudoku/createSudoku";
 import { solveSudoku, verifySudoku } from "@/utils/sudoku/solveSudoku";
+import { useEffect, useState } from "react";
 
 export default function NewGameButton() {
   const configuration = useGetConfiguration();
@@ -25,6 +27,10 @@ export default function NewGameButton() {
   const { show: showCreateNewGame, showCloseButton } = useSelector(
     (root: RootState) => root.popUp.createNewGame
   );
+  const { showCreateSudoku } = useSelector((root: RootState) => root.popUp);
+  showCreateSudoku;
+  const { emptySudoku } = useSelector((root: RootState) => root.sudoku);
+  const [isComplete, setIsComplete] = useState(false);
 
   const help = (level: Level) => {
     let next = true;
@@ -84,6 +90,21 @@ export default function NewGameButton() {
     },
   ];
 
+  useEffect(() => {
+    if (showCreateSudoku) return;
+    const howManyNumbersMissing = emptySudoku
+      .flat()
+      .filter((num) => num === null).length;
+    console.log(howManyNumbersMissing);
+    if (howManyNumbersMissing !== 0) {
+      setIsComplete(false);
+      return;
+    }
+    setIsComplete(true);
+    dispatch(cannotSeeCloseButtonNewGame());
+    dispatch(openShowCreateNewGame());
+  }, [emptySudoku, showCreateSudoku, dispatch]);
+
   return (
     <>
       {showCreateNewGame && (
@@ -94,7 +115,7 @@ export default function NewGameButton() {
           }}
         >
           <div
-            className="bg-white px-5 py-3"
+            className="bg-white px-5 py-3 max-w-[80%]"
             style={{
               background: configuration?.firstColor,
               color: configuration?.thirdColor,
@@ -113,13 +134,20 @@ export default function NewGameButton() {
               )}
             </div>
             <div className="body">
+              {isComplete && (
+                <p>
+                  Congratulations! You have successfully cracked the Sudoku
+                  puzzle. Your dedication, logical thinking, and problem-solving
+                  skills have paid off. Well done! 🎉
+                </p>
+              )}
               <p className="text-lg mb-3">Select A Level:</p>
 
-              <div className="levels flex flex-col gap-3">
+              <div className="levels flex flex-col gap-3 items-center">
                 {levels.map((level) => (
                   <button
                     key={level.level}
-                    className="px-3 py-1 shadow text-lg rounded-md hover:scale-105 transition-all duration-200"
+                    className="px-3 py-1 shadow text-lg rounded-md hover:scale-105 transition-all duration-200 min-w-[200px]"
                     style={{
                       background: configuration?.complementaryColor,
                       color: configuration?.firstColor,
