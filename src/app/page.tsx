@@ -48,7 +48,7 @@ export default function Home() {
       <main className="flex flex-col justify-center gap-8 px-8 py-4 md:flex-row">
         <Sudoku />
 
-        <div className="flex justify-between  flex-col gap-3">
+        <div className="flex justify-between  flex-col gap-3 items-center">
           <div className="actions flex justify-center items-center gap-4">
             <Errors />
             <ButtonNotes />

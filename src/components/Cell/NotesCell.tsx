@@ -95,7 +95,7 @@ export default function NotesCell(props: NotesCellProps) {
 
   return (
     <div
-      className="absolute left-0 top-0 bg-slate-300 w-full h-full border-b-2 border-r-2 grid-rows-3 grid-cols-3 grid text-xs justify-items-center p-1"
+      className="absolute left-0 top-0 bg-slate-300 w-full h-full border-b-2 border-r-2 grid-rows-3 grid-cols-3 grid justify-items-center content-center text-[9.5px] md:text-xs"
       style={{
         ...style,
         cursor: "pointer",
