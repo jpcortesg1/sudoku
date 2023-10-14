@@ -29,6 +29,7 @@ export default function NotesCell(props: NotesCellProps) {
     emptySudoku,
     clcikedDeleteButton,
   } = useSelector((state: RootState) => state.sudoku);
+  const { showCreateSudoku } = useSelector((root: RootState) => root.popUp);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -92,6 +93,16 @@ export default function NotesCell(props: NotesCellProps) {
     }
   }, [clcikedDeleteButton, row, col]);
   /* eslint-enable */
+
+  useEffect(() => {
+    if (!showCreateSudoku) return;
+    setNotes((current) =>
+      current.map((note) => ({
+        ...note,
+        active: false,
+      }))
+    );
+  }, [showCreateSudoku]);
 
   return (
     <div
