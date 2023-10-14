@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Level from "@/enum/Level";
 import Sudoku from "@/components/Sudoku";
 import TopBar from "@/components/Topbar";
-import useGetConfiguration from "@/hooks/redux/useGetConfiguration";
 import { createSudoku } from "@/utils/sudoku/createSudoku";
 import { solveSudoku, verifySudoku } from "@/utils/sudoku/solveSudoku";
 import { setEmptySudoku, setSudokuSolved } from "@/features/sudoku/sudokuSlice";
@@ -45,7 +44,7 @@ export default function Home() {
     <>
       <PopUp show={showCreateSudoku} />
       <TopBar />
-      <main className="flex flex-col justify-center gap-8 px-8 py-4 md:flex-row">
+      <main className="flex flex-col justify-center items-center gap-8 px-8 py-4 md:flex-row min-h-[calc(100vh-68px)]">
         <Sudoku />
 
         <div className="flex justify-between  flex-col gap-3 items-center">
