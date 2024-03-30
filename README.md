@@ -2,7 +2,7 @@
 
 ## Project Link
 
-[Play Sudoku Here](https://sudoku-l6w1tfakt-jpcortesg1s-projects.vercel.app/)
+[Play Sudoku Here](https://sudoku.jpcortesg.online/)
 
 ![ArcoLinux_2023-10-14_10-19-49](https://github.com/jpcortesg1/sudoku/assets/60229777/c332d867-fc03-4118-95fc-7449fbb8e19a)
 
